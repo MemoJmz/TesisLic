@@ -538,6 +538,40 @@ pues al calcular la derivada total de $u$
 \[
 0 = \frac{d}{dt} u(x(t), t) = u_t + \frac{dx}{dt} u_x
 \]
-Como 
+Como $u$ es constante a lo largo de las características, en particular $u(x(t), t) = u(x_0, 0) = u_0(x_0)$.
+El sistema característico resulta en
+\[
+\frac{dx(t)}{dt} = u_0(x_0)
+\]
+la cual es independiente de $t$. Luego
+\[
+x(t) = x_0 + u_0(x_0) t
+\]
+Para encontrar la solución basta encontrar $x_0$ en términos de $x$ y $t$, ya que $u_0$ es conocida.
+
+\section{Soluciones Débiles}
+Ley de conservación escalar: $ u_t + f(u)_x = 0 $, donde el flujo $f = f(u)$ es función explícita de $u$.
+
+\textbf{Nota: } Si usamos el método de las curvas carcaterísticas, podemos verificar que es posible la formación de ondas de choque (discontinuidades) en la solución a tiempo finito.
+
+Para llegar a la forma inegral de la ley de conservación, consideraremos un rectángulo en espacio fase $[x_0,x_1]\times[t_0, t_1]$ e integramos en esa área
+\[
+0 = \int_{x_0}^{x_1} \int_{t_0}^{t_1} \left[ u_t + (f(u))_x \right] dt dx
+\]
+\textbf{Llegamos a la fomra inegral de la ley de conservación } la cual la podemos encontrar en el anexo 1.
+
+\textbf{Definición: } Sea $f$ una funcion suave de $u(x,t)$ integrable se dice que es una solución débil a la ley de conservación 
+\[
+u_t + (f(u))_x = 0
+\]
+si $u$ satisface la forma integral en el dominio de $u$.
+
+\textbf{Nota: } Ésta condición no es muy práctica, pues se debe verificar para todo $x_0, x_1  \in \Omega$ y $t_0, t_1$.
+
+\textbf{Nota: } Si $u \in \mathcal{C}^1$ y es solución débil, entonces también es solución fuerte (clásica), esto es, satisface la Ecuacion diferencial parcial.
+
+Vamos a obtener condiciones de salto más practicas. Supongamos que el rectángulo 
+
+
 
 

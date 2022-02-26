@@ -1,9 +1,143 @@
-\chapter{Leyes de COnservación Hiperbólicas}\label{cap:Leyes}
+\chapter{Leyes de Conservación Hiperbólicas}\label{cap:Leyes}
 
-%\section{Introducción}
-Breve introducción al capítulo
+Una ley de conservación es la formulación matemática de un principio de conservación derivado fisicamente; el cual, permite describir la evolución temporal de una cantidad de interés, por ejemplo, la temperatura, la presión de un fluido o la concentración de una sustancia química.
 
-¿Qué motiva su clasificación? Hablar de lo siguiente:
+\section{Leyes de Conservación}
+Un \textbf{sistema de leyes de conservación  hiperbólico} es un sistema de EDP hiperbólico (SHLC) -usualmente no lineal-, con dependencia temporal de la forma
+\[
+w_t + \sum_{j=1}^d f^j(w)_{x_j} = 0
+\]
+que sea de tipo hiperbólico y donde 
+\[
+(\textbf{x}, t) \in \R^d \times [0, \infty), \qquad w \in \Omega \subset \R^n, \qquad f^j \in \mathcal{C}^2(\Omega, \R^n) \quad j=1,\dots, d.
+\]
 
-\section{}
+El término $t$ se le conoce como  \textit{variable temporal} y $\mathbf{x}$ \textit{variable espacial}; $w \in \mathbb{R}^n$ es el vector de \textit{variables conservadas o estados}, $\Omega$ el conjunto de estados admisibles, y $f^j$ son las funciones de flujo de la j-ésima componente espacial;  $n\geq 1$ es el número de cantidades conservadas y $d\geq1$ es la dimensión del espacio físico, para aplicaciones $d=1,2,3$.
 
+Si expresamos a $ w = \left[ u_1, \dots, u_d \right]^T$, el sistema anterior expresa la conservación de las cantidades $u_k$, $1\leq k \leq d$, en dominios arbitrarios del espacio físico, $\Omega \subset \mathbb{R}^d$. El flujo a través de $\partial \Omega$ de las variables conservadas $w$ está determinado por las funciones de flujo $f^j(w)$.
+
+Para presentar mejor las ideas que involucran los conceptos, consideremos el (SHLC) en una dimesión espacial
+\[
+\frac{\partial}{\partial t} \textbf{u}(x,t) + \frac{\partial}{\partial x} \textbf{f}(\textbf{u}((x,t))) = 0.
+\]
+Aquí $\textbf{u}:\R \times \R \rightarrow \R^m$ es un vector de dimensión $m$ de variables conservadas -o variables de estado-, como ejemplo estan la masa, el momento, y enegía -en un problema de dinámica de fluidos. Específicamente, cada componente $u_j$ de $\textbf{u}$ es la función de densidad de la j-ésima variable de estado.
+Tenemos la interpretación de que $\int_{x_1}^{x_2} u_j(x,t)dx$ es la cantidad total de la variable de estado $u_j$ en el intervalo $[x_0, x_1]$ al tiempo $t$.
+
+El hecho de que estas variables sean conservadas significa que $\int_{-\infty}^{\infty} u_j(x,t) dx$ debe permanecer constante al tiempo $t$, por lo que $u_j$ representa la distribución espacial de la variable de estado al tiempo $t$ la cual generalmente cambia respecto al tiempo.
+
+El flujo de la j-ésima componente esta dado por alguna función $f_j(u(x,t))$ y, la función vector valuada $\textbf{f}(\textbf{u})$ -con componente $f_j(u)$- es llamada la \textbf{función de flujo} para el sistema de leyes de conservación, $\textbf{f}:\R^m \rightarrow \R^m$.
+
+A la ecuación planetada deben proporcionarsele condiciones iniciales y, posiblemente también, condiciones de frontera en un dominio espacial acotado.  El problema más simple que involucra al sistema es el \textbf{problema de Cauchy}
+\[
+\begin{cases}
+&\textbf{u}_t + \textbf{f}(\textbf{u})_x = 0, \qquad x \in \R, t \geq 0 \\
+&\textbf{u}(x,0) = \textbf{u}_0(x), \qquad x \in \R.
+\end{cases}
+\]
+Se dice que el sistema es \textbf{hiperbólico} cuando la matriz jacobiana de dimensión $m\times m$ formada por las derivadas de la función de flujo, \textbf{f}'(\textbf{u}), cumple para cada valor de \textbf{u}, los valores propios de \textbf{f}'(\textbf{u}) son reales y la matriz es diagonalizable, es decir, existe un conjunto completo de $m$ vectores porpios linealmente independientes.
+
+Más adelante se mostrará el interés y la importancia de la propiedad de hiperbolicidad. Por ahora, un sistema de leyes de conservacion en dos dimensiones espaciales toma la forma
+\[
+u_t + f(u)_x + g(u)_y = 0
+\]
+donde $u:\R^2\times \R \rightarrow \R^m$ y con funciones de flujo $f,g:\R^m \rightarrow \R^m$.
+
+Sin embargo, la hiperbolicidad requiere, en este caso, que cualquier combinación lineal real $\alpha f'(u) + \beta g'(u)$ de los jacobianos de los flujos deba ser diagonalizable con valores reales.
+
+En general, no es posible derivar soluciones exactas para éste tipo de soluciones y de ahí la necesidad de idear y estudiar métodos numéricos para su solución aproximada. Las excepciones son para el problema de Riemann, donde se puede calcular soluciones exactas, por lo que son de gran utilizadad para verificar la efectividad de métodos numéricos.
+
+Mostremos, como primer ejemplo, las \textbf{ecuaciones de Euler para dinámica de gases.} En una dimensión, las ecuaciones tienen la siguiente forma
+\[
+\frac{\partial}{\partial t} 
+\begin{bmatrix}
+\rho \\
+\rho v \\
+E
+\end{bmatrix}
++
+\frac{\partial}{\partial x} 
+\begin{bmatrix}
+\rho v \\
+\rho v^2 + p \\
+v (E + p)
+\end{bmatrix} = 0
+\]
+donde $\rho = \rho(x,t)$ es la densidad, $v$ es la velocidad en dirección $x$, $\rho v$ es la densidad de momento lineal, $E$ es la energía y $p$ es la presión. La presión $p$ esta dada por una función conocida de otra variable de estado -la relación funcional específica depende del gas y es llamada \textit{la ecuación de estado}. Las ecuaciones de Euler son versiones simplificadas de las ecuaciones de Navier-Stokes al despreciar los términos viscosos.
+
+\textbf{Se moestrará en ? la derivación de las ecuaciones de Euler}.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\section{Sistemas}
+
+
+
+En forma cuasilineal, el sistema se escribe como
+\[
+w_t + A(w) \thinspace w_x = 0,
+\]
+donde $A(w) \in \R^n\times \R^n$ es la matriz Jacobiana de $f(w)$.
+
+\textbf{Me gustaría incluir la derivación fenomenológica de la ecuación, no se si aqui o en el anexo}
+
+En este caso el sistema se dice que es \textbf{hiperbólico} si $A(w)$ tiene valores propios reales y un sistema de vectores propios completo, i.e. forman una base, para cada $w$.
+
+Si $A$ es constante, es decir independiente de $w$, entonces el sistema es lineal
+\[
+w_t + A \thinspace w_x = 0
+\]
+Dado que $A$ es diagonalizable, $A$ se escribe como $R \Lambda R^{-1}$ con
+\[
+\Lambda = \begin{bmatrix} \lambda_a & & \\ & \ddots & \\ & & \lambda_n \end{bmatrix},
+\qquad 
+R = \begin{bmatrix}
+    | &  & |\\
+    r_1 & \cdots & r_n\\
+    | &  & |
+  \end{bmatrix},
+\]
+donde $\lambda_i$ es el valor propio asociado al vector propio $r_i$, para $1 \leq i \leq n$. 
+
+Notemos que el sistema lineal se puede expresar como $\partial_t v + \Lambda \thinspace v_x = 0$, con $v = R^{-1} w$ pues
+\begin{align*}
+w_t + A(w) \thinspace w_x &= 0 \\
+\implies w_t + R \Lambda R^{-1} \thinspace w_x &= 0 \\
+\implies R^{-1} w_t + \Lambda R^{-1} \thinspace w_x &= 0 \\
+\implies \partial_t(R^{-1} w) + \Lambda \partial_x \thinspace ( R^{-1} w) &= 0 \\
+\implies \partial_t v + \Lambda \thinspace v_x &= 0
+\end{align*}
+Si $v = [v_1, \dots, v_n]^T $, entonces
+\begin{align*}
+&\partial_t v_1 + \lambda_1 \partial_x v_1 = 0, \\
+\vdots \\
+&\partial_t v_n + \lambda_n \partial_x v_n = 0, \\
+\end{align*}
+Notemos que si tenemos un vector de condiciones iniciales $v_0 = [v_{\textbf{0},1}, \dots, v_{\textbf{0},n}]^T$, tenemos que cada ecuación del sistema anterior tiene por solución
+\[
+v_j = v_{\textbf{0},j} (x - \lambda_j t),
+\]
+
+
+\section{Resumen}
+Éstos sistemas tienen la particularidad de que muchos modelos en las ciencias tienen ésta forma. Además, las soluciones suaves del sistema existen sólo localmente en el tiempo debido al fenómeno de rompimiento a tiempo finito. Por otro lado, no existe teoria matemática satisfactoria debido a que las posibles soluciones discontinuas carecen de unicidad. Por lo mismo, se requieren criterios adicionales para seleccionar soluciones "fisicamente relevantes", como la condición de entropía.
