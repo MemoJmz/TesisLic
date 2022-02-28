@@ -1,38 +1,73 @@
 \chapter{Anexos}\label{cap:anexos}
 
 \section{Esquema General de las Leyes de Conservación}
+Sea $\Omega \subset \mathbb{R}^d$ arbitrario, abierto y acotado; con frontera $\partial \Omega$ suave -podemos aplicar el teorema de la divergencia.
 
-Consideramos un medio líquido, gas o sólido que ocupa una región o dominio (abierto y conexo) $\Omega \subset \mathbb{R}^n$, donde $n$ es la dimensión del espacio.
-
-Denotamos
+La \textit{ley de balance} establece que:
+\textit{Cantidades extensivas (masa, momento, energía, velcidad, etc.) tiene un balance entre producción dentro de $\Omega$ con la variación de las cantidades extensivas en el tiempo y el flujo de elas a través de $\partial \Omega$}.
+Denotamos por
 \[
-u = u(x,t), \qquad \qquad x \in \Omega, \quad t \geq 0
+u(x,t) = \begin{pmatrix}
+			u_1(x,t) \\
+			\vdots	 \\
+			u_n(x,t) 
+		 \end{pmatrix} \qquad \qquad x \in \Omega, \quad t \geq 0
 \]
-a una función, llamada \textit{función de estado,} la cual dependiendo del problema podrá representar temperatura o bien, la concentración de una sustancia, etc. Para el análisis de las leyes de conservación, se requiere un dominio de balance escogido arbitrariamente $\Omega' \subset \Omega,$ y un intervalo de tiempo arbitrario $[t_1, t_2]$. 
+con $u(x,t) \in \R^n$ al vector de densidades por unidad de volumen de las variables de estado.
 
-En general, $u$ puede ser función vectorial: $u: \Omega \longrightarrow \mathbb{R}^n$. En particular para $u$ es una función escalar para $n=1$.
+Suponemos que $u(x,t) \in U \subset \R^n$ es abierto y conexo -$U$ es llamado \textit{dominio de variables de estado}. 
 
-El caso $u$ escalar, incluye también, en general, una función fuente escalar $f=f(x,t), f:\Omega \times [0,t) \longrightarrow \mathbb{R}$ y un campo vectorial flujo, $\phi(x,t), \phi:\Omega \times [0,t) \longrightarrow \mathbb{R}^n$.
-
-Por ejemplo, si $u$ representa la temperatura, $f$ podría representar una fuente interna de calor, por ejemplo, una corriente eléctrica en el alambre y $\phi$ representa una ley física que determina la manera como cambia $u$, por ejemplo, la ley de calor de Fourier.
-
-La ley básica de balance establece que el cambio total de la cantidad $u$ contenida en $\Omega'$ entre los tiempos $t_1$ y $t_2$ debe igualar el flujo total a través de la frontera $\Omega'$ entre los tiempos $t_1$ y $t_2$ y el incremento o decremento de la cantidad $u$ produciendo por la fuente $f$, dentro de $\Omega'$ en el mismo intervalo de tiempo. En forma matemática esto queda expresado como
+Definimos
 \[
-\int_{\Omega'} u(x,t_2) \,dx - \int_{\Omega'} u(x,t_1) \,dx = - \int_{t_1}^{t_2} \int_{\partial \Omega'} \phi (x,t) \cdot \textbf{n} \,dS \,dt + \int_{t_1}^{t_2} \int_{\Omega'} f(x,t) \,dx \,dt.
+M(t) := \int_{\Omega} u(x,t) dx
 \]
-Si se supone que $u$ tiene primera derivada continua respecto de $t$, por medio del teorema fundamental del cálculo y del teorema de Fubini se obtiene
+como la masa total de las variables conservadas en $\Omega$ a tiempo $t>0$. Suponemos que existe un tensor $F \in \R^{n\times d}$ tal que la cantidad de $u$ ue fluye a través de un elemento $dS \subset \partial \Omega$, cuya normal exterior es $\hat{n} \in \R^d$, -$|\hat{n}| = 1$- esta dada por
 \[
-\int_{\Omega'} \frac{\partial}{\partial t} u(x,t) \,dx = - \int_{\partial \Omega'} \phi(x,t) \cdot \textbf{n} \,dS + \int_{\Omega'} f(x,t) \,dx.
-\]
-Al utilizar el teorema de la divergencia, podemos escribir
-\[
-\int_{\Omega'} \left( \frac{\partial}{\partial t} u(x,t) + \text{div} \thinspace \phi(x, t)- f(x,t) \right) \,dx = 0.
-\]
+- F \hat{n} d S_x \in \R^n
+\] 
+El flujo de cada variable de estado $u_j$ es $-f^j \cdot \hat{n} dS_x$ donde $F = (f^1 \cdots f^d) \in \R^{n\times d}$, esto es, $f^j \in \R^{d \times 1}$ es la j-ésima columna de $F$.
 
-La cual es \textit{la forma global o integral de la ley de conservación evolutiva}. Si se supone la continuidad del integrando, dado que la región $\Omega' \subset \Omega$ fue arbitraria, se obtiene \textit{la forma local o diferencial de la ley de conservación evolutiva}
+Luego, la masa total de $u$ que fluye a través de la frontera es
 \[
-u_t (x,t) + \text{div} \thinspace \phi(x,t)-f(x,t) = 0.
-\]  
+-\int_{\partial \Omega} F \hat{n} dS_x
+\]
+Ahora, la \textit{producción} es la interacción del sistema con campos externos o términos de producción, representados por la función $(x,t) \mapsto g(x,t) \in \R^n$. La componente $g_j$ es la densidad por unidad de volumen del término de balance para la cantidad $u_j$.
+
+Así, en términos matemáticos, formulamos el \textit{Principio de Balance}
+\begin{align*}
+\frac{d}{dt} M(t) &= \frac{d}{dt} \int_{\Omega} u(x,t) dx \\
+				 &= - \int_{\partial \Omega} F \hat{n} dS_x + \int_{\Omega} d dx
+\end{align*}
+Para cada componente, $k$ fijo, $1\leq k \leq n$,
+\begin{align*}
+\int_{\Omega} g_k dx &= \frac{d}{dt} \int_{\Omega} u_k(x,t) dx + \int_{\partial\Omega} \sum_{j=1}^d f_k^j n_j dS_x \\
+\text{Por el teorema de la divergencia} \\
+			&= \frac{d}{dt} \int_{\Omega} u_k(x,t) + \int_{\Omega} \text{div}_x \begin{pmatrix}
+								f_k^1 \\
+								\vdots \\
+								f_k^d
+							\end{pmatrix} dx \\
+			&= \int_{\Omega} \left[ \partial_t u_k + \sum_{j=1}^d \partial_{x_j} (f_k^j) \right] dx
+\end{align*}
+Entonces, para todo volumen $\Omega$ arbitrario
+\begin{align*}
+\int_{\Omega} \left[ \partial_t u_k + \sum_{j=1}^d \partial_{x_j} (f_k^j) - g_k \right] dx = 0	\\
+\iff \int_{\Omega} \left[ \partial_t u + \sum_{j=1}^d \partial_{x_j} (f^j) - g \right] dx = 0,
+\end{align*}
+en $\R^n$.
+
+Suponiendo que el integrando es continuo concluimos que
+\[
+\partial_t u + \sum_{j=1}^d \partial_{x_j} f^j = g
+\]
+En la modelación, sistemas de leyes de conservación significa que $f^j = f^j(u)$. Si
+\begin{tabular}{r l}
+$g = g(u)$ & ley de balance \\
+$g = g(x,t)$ & forzamiento externo \\
+$g \equiv 0$ & ley de conservación.
+\end{tabular}
+
+
 
 \section{Ecuación de Burgers}
 Una ecuación cuasilieneal de primer orden muy importante es la \textit{ecuación de Burgers}

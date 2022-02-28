@@ -1,22 +1,14 @@
 \chapter{Leyes de Conservación Hiperbólicas}\label{cap:Leyes}
 
-Una ley de conservación es la formulación matemática de un principio de conservación derivado fisicamente; el cual, permite describir la evolución temporal de una cantidad de interés, por ejemplo, la temperatura, la presión de un fluido o la concentración de una sustancia química.
+Una ley de conservación es la formulación matemática de un principio de conservación derivado fisicamente. Este modelo permite describir la evolución temporal de una cantidad de interés como la temperatura, la presión de un fluido o la concentración de una sustancia química. 
+
+Para presentar mejor las ideas que involucran los conceptos consideremos un sistema de leyes de conservación hiperbólica (SHLC) con una dimesión espacial. Luego, introduciremos el sistema general, para luego adentrarnos en la teoría para su estudio.
+
+Gran parte de la teoría sobre leyes de conservación fue desarrollada con las ecuaciones de Euler en mente y muchos métodos numéricos fueron desarrollados específicamente para este sistema, por lo que serán un ejemplo recurrente.
+
 
 \section{Leyes de Conservación}
 Un \textbf{sistema de leyes de conservación  hiperbólico} es un sistema de EDP hiperbólico (SHLC) -usualmente no lineal-, con dependencia temporal de la forma
-\[
-w_t + \sum_{j=1}^d f^j(w)_{x_j} = 0
-\]
-que sea de tipo hiperbólico y donde 
-\[
-(\textbf{x}, t) \in \R^d \times [0, \infty), \qquad w \in \Omega \subset \R^n, \qquad f^j \in \mathcal{C}^2(\Omega, \R^n) \quad j=1,\dots, d.
-\]
-
-El término $t$ se le conoce como  \textit{variable temporal} y $\mathbf{x}$ \textit{variable espacial}; $w \in \mathbb{R}^n$ es el vector de \textit{variables conservadas o estados}, $\Omega$ el conjunto de estados admisibles, y $f^j$ son las funciones de flujo de la j-ésima componente espacial;  $n\geq 1$ es el número de cantidades conservadas y $d\geq1$ es la dimensión del espacio físico, para aplicaciones $d=1,2,3$.
-
-Si expresamos a $ w = \left[ u_1, \dots, u_d \right]^T$, el sistema anterior expresa la conservación de las cantidades $u_k$, $1\leq k \leq d$, en dominios arbitrarios del espacio físico, $\Omega \subset \mathbb{R}^d$. El flujo a través de $\partial \Omega$ de las variables conservadas $w$ está determinado por las funciones de flujo $f^j(w)$.
-
-Para presentar mejor las ideas que involucran los conceptos, consideremos el (SHLC) en una dimesión espacial
 \[
 \frac{\partial}{\partial t} \textbf{u}(x,t) + \frac{\partial}{\partial x} \textbf{f}(\textbf{u}((x,t))) = 0.
 \]
@@ -62,11 +54,209 @@ E
 v (E + p)
 \end{bmatrix} = 0
 \]
-donde $\rho = \rho(x,t)$ es la densidad, $v$ es la velocidad en dirección $x$, $\rho v$ es la densidad de momento lineal, $E$ es la energía y $p$ es la presión. La presión $p$ esta dada por una función conocida de otra variable de estado -la relación funcional específica depende del gas y es llamada \textit{la ecuación de estado}. Las ecuaciones de Euler son versiones simplificadas de las ecuaciones de Navier-Stokes al despreciar los términos viscosos.
+donde $\rho = \rho(x,t)$ es la densidad, $v$ es la velocidad en dirección $x$, $\rho v$ es la densidad de momento lineal, $E$ es la energía y $p$ es la presión. La presión $p$ esta dada por una función conocida de otra variable de estado -la relación funcional específica depende del gas y es llamada \textit{la ecuación de estado}. Las ecuaciones de Euler son versiones simplificadas de las ecuaciones de Navier-Stokes al despreciar los términos viscosos y la conducción del calor.
 
 \textbf{Se moestrará en ? la derivación de las ecuaciones de Euler}.
 
 
+\subsection{Problema de la onda de choque en un tubo}
+
+Las leyes de conservación tienen soluciones con comportamientos interesantes. Como ejemplo veamos la onda de choque en un tubo:
+
+Tenemos un tubo lleno de un gas que inicialmente esta dividido por una membrana en dos secciones iguales. El gas en la primer sección tiene una mayor presión y densidad que en la segunda sección, el gas esta en reposo, es decir, la velocidad del gas es cero en todo el tubo. A un tiempo $t=0$, la membrana se remueve súbitamente dando lugar a un flujo con dirección a la secció de menor presión. Suponiendo que el flujo es uniforme a través del tubo, se tiene una variación en solo una dirección; por lo que podemos aplicar las ecuaciones de Euler de una dimesión.
+
+La dimánica del flujo involucra tres ondas que separan al tubo en regiones donde las variables de estado son constantes
+
+\begin{enumerate}
+\item Una \textbf{onda de choque} se propaga a la región de menor presión, produciendo un salto en los valores de la densidad y presión y todas las variables de estado son discontinuas.
+\item Le sigue una \textbf{discontinuidad de contacto} donde la densidad es discontinua pero la velocidad y la presión son constantes.
+\item La tercer onda se mueve en dirección opuesta. Todas las variables de estado son continuas y tienen una transición suave. Ésta onda es llamada \textbf{onda de rarefacción} debido a que la densidad del gas decrece (se enrarece) a medida que viaja ésta onda.
+\end{enumerate}
+
+
+\textbf{Mostrar imagenes}
+
+En un experimento real las variables de estado no son discontinuas a través de la onda de choque o discontinuidad de contacto  debido a los efectos de la viscocidad y conducción de calor. Estos son ignorados en las ecuaciones de Euler. Si incluimos estos efectos, usando las ecuaciones de Navier-Stokes completas, entonces la solución de la EDP sería suave. Sin embargo, estas soluciones suaves serían casi discontinuas, en el sentido de que el aumento en la densidad se produciría en una distancia microscópica en comparación con la escala de la longitud del tubo.
+
+Por lo que si comparamos las soluciones suaves con las gráficas discontinuas parecerían indistinguibles. Por ésta razón se ignoran éstos términos viscosos y se trabaja con las -más simples- ecuaciones de Euler. Éstas ecuaciones son de gran importancia para la aerodinámica, por ejemplo para modelar el flujo de aire alrededor de una aeronave. 
+
+
+\subsection{Consideraciones en las Leyes de Conservación}
+
+\subsubsection*{Consideraciones Matemáticas}
+En el sentido clásico, soluciones discontinuas  no satisfacen una EDP en todo punto debido a que las derivadas no están definidas en las discontinuidades. Sin embargo, "soluciones" de este tipo se presentan en el estudio de leyes de conservación, para ellos será necesario definir, en este contexto, a que nos referimos por solución de las leyes de conservación.
+
+Presentaremos la formulación integral de leyes de conservación a partir de principios físicos, con lo que llegaremos a una definición aceptable para este contexto, el concepto será el de \textbf{soluciones débiles}. El hecho crucial es que la forma integral continua siendo válida incluso para soluciones discontinuas.
+
+Sin embargo, trabajar con la forma integral es más difícil que con la ecuacion diferencial -especialmente cuando se trata de la discretización-. Otra aproximación es proveerle a la ecuacion diferencial "condiciones de salto" que satisfagan en las discontinuidades ya que la EDP continua siendo válida excepto en discontinuidades. Esta condición -llamada de \textit{Rankine-Hugoniot}- puede ser derivada a través de la forma integral.
+
+
+\textbf{debo reescribir el sisguiente parrafo}
+Para evitar la necesidad de imponer explícitamente estas condiciones, introduciremos la "forma débil" de la ecuacion diferencial. Esto de nuevo involucra integrales y permite soluciones discontinuas pero mas faciles de trabajar que con la forma integral original de la leyd de conservacion. La forma ´debil será fundamental en el desarrollo y analisis de métodos numericos.
+
+
+La posible no unicidad de soluciones es otra dificultad. Usualmente hay más de una solución débil a la ley de conservación con los mismos datos iniciales debido a que nuestras ecuaciones son solo un modelo. En particular, las leyes de conservación hiperbólicas no incluyen efectos viscosos o difusivos, por lo que claramente algunos efectos físicos son ignorados.
+
+Se espera que el modelo con las ecuaciones de Euler sea el límite de las soluciones suaves a medida que el parámetro de viscocidad se aproxima a cero, el cual será en efecto una solucion débil de las ecuaciones de Euler.
+
+Como nuestra ley de conservación modela el mundo real, entonces solo una de éstas es físicamente relevante. Por lo mismo, es posible y necesario imponer condiciones relacionadas a la naturaleza del fenómeno. Por ejemplo, en dinámica de gases se apela a la segunda ley de la termodinámica, la cual establece que la entropía es no decreciente. En particular, cuando moleculas de gas pasan a través de una choque su entropía debe aumentar. 
+
+Así, en sistemas de leyes de conservacion es posible derivar condiciones similares. Estas son llamadas \textbf{condiciones de entropía} -en analogía a dinamica de gases. Resulta que esta condición es suficiente para reconocer precisamente aquellas discontinuidades que son físicamente correctas y especifiar una única solucion.
+
+Armados con esta noción de soluciones débiles y una apropiada condiciones de entropía, podemos definir matemáticamente una solución única a los sistemas de leyes de conservación  que es el límite no viscoso físicamente correcto.
+
+\subsubsection*{Consideraciones Numéricas}
+Al intentar calcular soluciones numéricas nos enfrentamos nos enfrentamos a problemas con la estabilidad y precisión de los métodos cerca de las discontinuidades.
+
+Una posible solución es llamado \textbf{rastreo de choque}, consiste en combinar un método estándar de diferencias finitas en regiones derivables -esto debido a que las EDPs se siguen satisfaciendose lejos de discontinuidades- con un procedimiento explícito para localizar discontinuidades. Éste es el análogo numérico del acercamiento matematico en las cuales las EDPs son dotadas de condiciones de salto a través de discontinuidades.
+
+Por otro lado, los métodos de \textbf{captura de choques} son aqeullos que intentan producir aproximaciones nítidas a soluciones discontinuas automáticamente, sin seguimiento explícito ni uso de condiciones de salto. 
+
+Además, existen los llamados \textbf{métodos de alta resolución} con propiedades de precisión y resolución como
+\begin{itemize}
+\item Exactitud de al menos segundo orden en soluciones suaves, y además en regiones suves de una solución incluso cuando las discontinuidades están presentes en otdas partes.
+\item Resolución nítida de discontinuidades sin excesivas manchas
+\item La ausencia de oscilaciones espurias en la solución calculada.
+\item Una forma apropiada de conssitencia con la forma débil de la ley de conservación -requerida si esperamos converger a soluciones débiles.
+\item Limmites de estabilidad no lineal que, junto con las consistencia, no spermita probar convergencia a medida que se refina la malla.
+\item Una forma discreta de la condición de entropía, que nos permita concluir que las aproximaciones convergen a la solución débil físicamente correcta.
+\end{itemize}
+
+Para sistemas lineales hiperbólicos, las \textbf{características} juegan un papel uy importante. Para sistemas no lineales, la generalización de ésta teoría que es mayormente usada en el desarrollo de métodos numéricos es la solución de un \textbf{problema de Riemann}. Éste consiste en la ley de conservación con la siguiente condición inicial
+\[
+\textbf{u}(x,0) 
+= \begin{cases}
+	\textbf{u}_\textit{l} \qquad x<0,
+	\textbf{u}_\textit{r} \qquad x>0.
+  \end{cases}
+\]
+En el caso de las ecuaciones de Euler, éste es el problema de ondas de choque de un tubo -que se plante+o anteriormente. La solución a este problema tiene una estructura relativamente simple y en muchos casos se puede calcular explícitamente. Mediante un método numérico podemos estimar un conjunto de valores discretos $\textbf{U}_j^{(n)}$ que aproxime a $\textbf{u}(x_j, t_n)$ en un conjunto de puntos ${(x_j, t_n)}$. Podemos obtener una gran cantidad de información de la estructura local de la solución cerca de $(x_j, t_n)$ mediante la resolución del problema de Riemann con datos $\textbf{u}_\textit{l} = \textbf{U}_j^{(n)}$ y $\textbf{u}_\textit{r} = \textbf{U}_{j+1}^{(n)}$. 
+
+En la mayoría de los métodos numéricos aplicables a sistemas de EPD's no es posible obtener los resultados de estabilidad no lineal para probar su convergencia Se requiere más análisis en el caos sencillo de una ecuación escalar. En particular, es posible demostrar que en muchos métodos numéricos la variación toral de la solución decrece en el tiempo. Esto es suficiente para obtener algunos resultados de convergencia y garantiza que no se generen oscilaciones espurias. Aquellos métodos que cumplen con esta propiedad se conocen como métodos de \textbf{Disminución de Variación Total} (\textbf{TVD}).
+
+\subsection{Derivación de las Leyes de Conseración}
+Para saber como las leyes de conservación surgen de principios físicos, empezaremos derivando una ecuación de balance en una dinámica de fluidos uno dimensional -como es el caso del problema de la onda de choque en un tubo.
+
+Sea $x$ la variable que representa la distancia a lo largo una dirección. Sea $u(x,t)$ una variable conservada -densidad de masa, momento, energía, temperatura, etc-, al punto $x$ y tiempo $t$. Ésta cantidad es definida de tal forma que la cantidad total de ésta variable en el intervalo $[x_1, x_2]$ al tiempo $t$ es
+\[
+\int_{x_1}^{x_2} u(x,t) dx.
+\]
+Notemos que la cantidad anterior solo depende del tiempo $t$.En general, también conocemos una función fuente escalar $g=g(x,t), g:[x_1, x_2] \times [0,t) \longrightarrow \R$ y un campo vectorial flujo, $f(x,t), f:[x_1,x_2] \times [0,t) \longrightarrow \R$.
+
+La ley básica de balance establece que el cambio total de la cantidad $u$ contenida en $[x_1, x_2]$ entre los tiempos $t_1$ y $t_2$ debe igualar el flujo total a través de los extremos $x=x_1$ y $x=x_2$ entre los tiempos $t_1$ y $t_2$ y el incremento o decremento de la cantidad $u$ producido por la fuente $g$ dentro de $[x_1,x_2]$ en el mismo intervalo de tiempo
+\[
+\int_{x_1}^{x_2} u(x,t_2) dx - \int_{x_1}^{x_2} u(x,t) dx = - \int_{t_1}^{t_2} \left[ f(x_2,t) - f(x_1, t) \right] dt + \int_{t_1}^{t_2} \int_{x_1}^{x_2} g(x,t) dx dt
+\]
+Si se supone que $u$ tiene primera derivada continua respecto de $t$, por medio del teorema fundamental del cálculo y del teorema de Fubini se obtiene
+\[
+\int_{x_1}^{x_2} \frac{\partial}{\partial t} u(x,t) dx = - \left[ f(x_2,t) - f(x_1, t) \right] +  \int_{x_1}^{x_2} g(x,t) dx.
+\]
+equivalentemente
+\[
+\int_{x_1}^{x_2} \left( \frac{\partial}{\partial t} u(x,t) + \frac{\partial}{\partial x} f(x,t) - g(x,t) \right) dx = 0.
+\]
+La cual es la \textit{forma global o integral de la ley de conservación}. Si se supone la continuidad del integrando, dado que la región $[x_1,x_2]$ fue arbitraria, se obtiene \textit{la forma local o diferencial de la ley de conservación}
+\[
+u_t(x,t) +  f_x(x,t) - g(x,t) = 0.
+\]
+En modelación dependiendo del término $g$ tenemos
+\begin{tabular}{r l}
+$g = g(u)$ & ley de balance \\
+$g = g(x,t)$ & forzamiento externo \\
+$g \equiv 0$ & ley de conservación.
+\end{tabular}
+\textbf{Ver anexo 1 para la formualción para dominios más generales}
+
+Por ejemplo, si $u$ representa la temperatura, $g$ podría representar una fuente interna de calor, por ejemplo, una corriente eléctrica en el alambre y $f$ representa una ley física que determina la manera como cambia $u$, por ejemplo, la ley de calor de Fourier.
+
+Otro ejemplo, son las ecuaciones de Euler
+\begin{align*}
+\rho_t + f(\rho)_x &=0 \\
+(\rho v)_t + (\rho v^2 + p)_x &= 0 \\
+E_t + (v(E+\rho))_x &= 0
+\end{align*}
+donde cada ecuación representa la \textit{conservación de masa}, la \textit{conservación de momento}, y la \textit{conservación de energia}, respectivamente. Donde $\rho$ es la densidad de masa, $v$ es la velocidad $\rho v$ el momento, $E$ energía y $p$ es la presión. Ésta última cantidad debe ser espeficicada como una función dada de $\rho, \rho v, E$ para que los flujos sean funciones bien definidas solo de las cantidades conservadas. Ésta ecuación adicional es llamada \textbf{ecuación de estado} y depende de las propiedades físicas del fluido bajo estudio.
+
+Si introducimos el vector $u \in \R^3$ como
+\[
+u(x,t) = \begin{pmatrix}
+		 \rho(x,t)	\\
+		 \rho(x,t) v(x,t) \\
+		 E(x,t)
+		 \end{pmatrix}
+		 =:
+		 \begin{pmatrix}
+		 u_1		\\
+		 u_2		\\
+		 u_3
+		 \end{pmatrix},
+\]
+entonces el sistema de ecuaciones anterior puede ser escrito simplemente como
+\[
+u_t + f(u)_x = 0
+\]
+donde
+\[
+f(u) = \begin{pmatrix}
+	   \rho v	\\
+	   \rho v^2 + p	\\
+	   v(E + p)
+	   \end{pmatrix}
+	   =
+	   \begin{pmatrix}
+	   u_2	\\
+	   u_2^2/u_1 + p(u)	\\
+	   u_2(u_3 + p(u))/u_1
+	   \end{pmatrix}.
+\]
+
+\subsection{Ejemplos}
+\subsubsection{Ecuación de transporte lineal}
+Supongamos que una sustancia química de concentración $u$ se vierte en un río rectilíneo cuya velocidad de corriente viene dada por la función $a: \R \rightarrow \R$. Entonces, el producto contaminante se desplaza rio abajo con un flujo
+\[
+f(x,t) = a(x)u(x,t)
+\]
+La ley de conservación que describe este problema modelo viene dada por
+\[
+u_t(x,t) + (a(x)u(x,t))_x = 0  \qquad x \in \R, t\geq0.
+\]
+Se trata de una ecuación hiperbólica escalar y lineal y su estudio matemático -y numérico- es relativamente sencillo en comparaci´on con los modelos no lineales que pueden generar discontinuidades (ondas de choque) incluso cuando todos los datos son regulares.
+
+La ecuación del transporte lineal tridimensional
+\[
+u_t(x,t) + \text{div}(a(x)u(x,t)) = 0 \qquad x \in \R^3, t\geq0.
+\]
+es evidentemente que es un modelo más realista y también más complejo de estudiar. En este caso la velocidad de la corriente es una función vectorial $a : \R^3 \rightarrow \R^3$.
+
+\subsubsection{Ecuación de Burguers}
+La ecuación de Burguers es el problema modelo por excelencia en el estudio de las leyes de conservación escalares. Es una ecuación sencilla que refleja muchas de las características básicas de los problemas hiperbólicos no lineales que estudiaremos en este trabajo. Se trata de una ley de conservación con un flujo  $f : \R \rightarrow \R$ dado por
+\[
+f(u) = \frac{u^2}{2}.
+\]
+Por lo tanto, la forma conservativa de la ecuación de Burguers es
+\[
+u_t(x,t) + \left( \frac{u^2 (x,t)}{2} \right)_x = 0 \qquad x \in \R, t\geq0.
+\]
+y la forma no conservativa (cuasilineal) viene dada por
+\[
+u_t(x,t) + u(x,t) u(x,t)_x = 0 \qquad x \in \R, t\geq0.
+\]
+
+
+\subsubsection{El modelo del flujo del tráfico}
+Nos interesamos modelar el flujo del tráfico de coches en una autopista. Sea $u$ la densidad de coches, en vehículos por kilómetro, y $v$ la velocidad media de circulación. Por lo tnato el flujo de coches es $f=v u$.
+
+Es evidente que existe un valor máximo $u_{max}$ de la densidad, a partir del cual el tráfico colapsa en un atascón. Para relacionar la velocidad $v$ con $u$ notamos que, en una autopista en la existe un límite de velocidad $v_{max}$, la velocidad de circulación debe ser inversamente proporcional a la densidad de los coches.
+
+Basados en estas observaciones vemos que la relación \[
+v(u) = v_{max}(1 − u/u_{max})
+\]
+es un modelo razonable para este fenómeno.
+
+Por lo tanto, la ley de la conservación del flujo del tráfico consiste en la ecuación
+\[
+u_t + \left( u(v_{max} − u\frac{v_{max}}{u_{max}})_x \right ) = 0 \qquad x \in \R, t\geq0.
+\]
 
 
 
@@ -82,6 +272,19 @@ donde $\rho = \rho(x,t)$ es la densidad, $v$ es la velocidad en dirección $x$, 
 
 
 
+\section{SHLC}
+En la literatura científica llamamos \textbf{Sistemas Hiperbólicos de Leyes de Conservación} (SHLC) a sistemas de EDPs de la forma
+\[
+w_t + \sum_{j=1}^d f^j(w)_{x_j} = 0
+\]
+que sea de tipo hiperbólico y donde 
+\[
+(\textbf{x}, t) \in \R^d \times [0, \infty), \qquad w \in \Omega \subset \R^n, \qquad f^j \in \mathcal{C}^2(\Omega, \R^n) \quad j=1,\dots, d.
+\]
+
+El término $t$ se le conoce como  \textit{variable temporal} y $\mathbf{x}$ \textit{variable espacial}; $w \in \mathbb{R}^n$ es el vector de \textit{variables conservadas o estados}, $\Omega$ el conjunto de estados admisibles, y $f^j$ son las funciones de flujo de la j-ésima componente espacial;  $n\geq 1$ es el número de cantidades conservadas y $d\geq1$ es la dimensión del espacio físico, para aplicaciones $d=1,2,3$.
+
+Si expresamos a $ w = \left[ u_1, \dots, u_d \right]^T$, el sistema anterior expresa la conservación de las cantidades $u_k$, $1\leq k \leq d$, en dominios arbitrarios del espacio físico, $\Omega \subset \mathbb{R}^d$. El flujo a través de $\partial \Omega$ de las variables conservadas $w$ está determinado por las funciones de flujo $f^j(w)$.
 
 
 
@@ -89,7 +292,12 @@ donde $\rho = \rho(x,t)$ es la densidad, $v$ es la velocidad en dirección $x$, 
 
 
 
-\section{Sistemas}
+
+
+
+
+
+
 
 
 
@@ -97,7 +305,11 @@ En forma cuasilineal, el sistema se escribe como
 \[
 w_t + A(w) \thinspace w_x = 0,
 \]
-donde $A(w) \in \R^n\times \R^n$ es la matriz Jacobiana de $f(w)$.
+donde $A(w) \in \R^n\times \R^n$ es la matriz Jacobiana de $f(w)$, es llamado hiperbólico, is para cada $\textbf{x}, t, \textbf{u}$ y un vector unitario $(\alpha_1, \dots, \alpha_d$, la matriz
+\[
+\sum_{i=1}^d A_i \alpha_i
+\]
+tiene valore sporpios distintos y reales.
 
 \textbf{Me gustaría incluir la derivación fenomenológica de la ecuación, no se si aqui o en el anexo}
 
@@ -137,7 +349,31 @@ Notemos que si tenemos un vector de condiciones iniciales $v_0 = [v_{\textbf{0},
 \[
 v_j = v_{\textbf{0},j} (x - \lambda_j t),
 \]
+Con lo que 
+\[
+w = R v = \sum_{i=1}^n v_j(x,t) r_j = \sum_{j=1}^n v_{\textbf{0},j} (x - \lambda_j t) r_j
+\]
 
+\text{esto necesita mas contexto, informacion}
+De aquí se puede ver como es la solución a un problema de Riemann para sistemas
+\[
+\begin{cases}
+w_t + A w_x = 0 \\
+w(x, t=0) = \begin{cases}
+			w_l &\quad x \leq 0 \\
+			w_r &\quad x > 0. 
+			\end{cases}
+\end{cases}
+\]
+En este caso la solución consiste de estados intermedios conectados mediante ondas de choque asociadas a cada valor propio
+
+\textbf{Mostrar Imagen}
+
+\textbf{explicar la siguiente nota}
+\textbf{Nota: } Calcular los estados intermedios se puede lograr udanso invariantes (de Riemann) para el caso no lineal, pero puede ser tedioso.
+
+
+\textbf{La siguiente seccion no se si tenga buen nombre y no se si deba oncluirlo en esta parte, ademas le falta informacion}
 
 \section{Resumen}
-Éstos sistemas tienen la particularidad de que muchos modelos en las ciencias tienen ésta forma. Además, las soluciones suaves del sistema existen sólo localmente en el tiempo debido al fenómeno de rompimiento a tiempo finito. Por otro lado, no existe teoria matemática satisfactoria debido a que las posibles soluciones discontinuas carecen de unicidad. Por lo mismo, se requieren criterios adicionales para seleccionar soluciones "fisicamente relevantes", como la condición de entropía.
+Éstos sistemas tienen la particularidad de que muchos modelos en las ciencias tienen ésta forma. Además, las soluciones suaves del sistema existen sólo localmente en el tiempo debido al fenómeno de rompimiento a tiempo finito. Por otro lado, no existe teoría matemática satisfactoria debido a que las posibles soluciones discontinuas carecen de unicidad. Por lo mismo, se requieren criterios adicionales para seleccionar soluciones "fisicamente relevantes", como la condición de entropía.
